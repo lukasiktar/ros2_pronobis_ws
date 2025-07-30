@@ -19,8 +19,8 @@ from scipy import ndimage
 import sys
 sys.path.append("/home/crta-hp-408/PRONOBIS/MicroSegNet")
 
-from CRTA_MicroSegment.TransUNet.networks import vit_seg_configs as configs
-from CRTA_MicroSegment.TransUNet.networks.vit_seg_modeling_resnet_skip import ResNetV2
+from TransUNet.networks import vit_seg_configs as configs
+from TransUNet.networks.vit_seg_modeling_resnet_skip import ResNetV2
 
 
 logger = logging.getLogger(__name__)

@@ -43,7 +43,7 @@ class MicrosegnetNode(Node):
         future.add_done_callback(self.response_callback)
 
         #Microsegnet settings
-        self.MODEL_PATH="/home/crta-hp-408/PRONOBIS/MicroSegNet/model/CRTA_MicroSegmentMicroUS224_R50-ViT-B_16_weight4_epo30_bs4_ev02/epoch_29.pth"
+        self.MODEL_PATH="/home/crta-hp-408/PRONOBIS/ros2_pronobis_ws/cls_epoch_9.pth"
         MAIN_DIRECTORY_NAME="/home/crta-hp-408/PRONOBIS/vtk/microsegnet"
         self.INPUT_IMAGES_DIRECTORY=f"{MAIN_DIRECTORY_NAME}/input_images"
         self.OUTPUT_MASKS_DIRECTORY=f"{MAIN_DIRECTORY_NAME}/output_images"
@@ -143,7 +143,8 @@ class MicrosegnetNode(Node):
                 cls_pred = torch.sigmoid(cls_output).squeeze()
                 #self.get_logger().info(f"{cls_pred}")
                 #Check if the classification predicts an object (you may need to adjust the threshold)
-                if cls_pred.item() < 0.99:  
+                self.get_logger().info(f'Confidence: {cls_pred.item()}')
+                if cls_pred.item() < 0.98:  
                     # If no object is predicted, create a black mask
                     pred = np.zeros((self.image.shape[0], self.image.shape[1]), dtype=np.uint8)
                     self.blank_images_counter+=1
